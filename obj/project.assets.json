@@ -8,19 +8,24 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\ernes\\.nuget\\packages\\": {}
+    "C:\\Users\\vejas\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ernes\\Documents\\University\\Produkto vystymo projektas\\test\\test.csproj",
+      "projectUniqueName": "C:\\Users\\vejas\\OneDrive - Kaunas University of Technology\\_Trečias kursas\\pvp\\pvp\\test.csproj",
       "projectName": "test",
-      "projectPath": "C:\\Users\\ernes\\Documents\\University\\Produkto vystymo projektas\\test\\test.csproj",
-      "packagesPath": "C:\\Users\\ernes\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ernes\\Documents\\University\\Produkto vystymo projektas\\test\\obj\\",
+      "projectPath": "C:\\Users\\vejas\\OneDrive - Kaunas University of Technology\\_Trečias kursas\\pvp\\pvp\\test.csproj",
+      "packagesPath": "C:\\Users\\vejas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vejas\\OneDrive - Kaunas University of Technology\\_Trečias kursas\\pvp\\pvp\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\ernes\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vejas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -51,7 +56,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -63,7 +69,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }
