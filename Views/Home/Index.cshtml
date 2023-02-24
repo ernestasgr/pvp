@@ -46,9 +46,93 @@ int main()
             }
         })
     }
+
+    function rotateNeedle(needle, angle) {
+        needle.style.transform = 'rotate(' + angle + 'deg)';
+    }
+
+    let angle = 0;
+    let speed = 0.5;
+    let maxAngle = 0;
+
+  function updateMaxAngle() {
+    $.ajax({
+        type: "POST",
+        url: "/Home/ShowConsumptionValue",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+        let newMaxAngle = parseInt(data);
+        if (!isNaN(newMaxAngle) && newMaxAngle !== maxAngle) {
+            maxAngle = newMaxAngle;
+            rotateNeedle(document.querySelector('.needle'), 0); // reseting the angle of the needle (may change to instead to start from the current place)
+            angle = 0; // reset the angle variable (may change to instead to start from the current angle)
+            updateConsumptionMeaming();
+        }
+        },
+
+        error: function () {
+            console.log("Error retrieving new max angle.");
+        }
+    });
+}
+
+
+setInterval(function () {
+    if (angle < maxAngle) {
+        angle += speed;
+        rotateNeedle(document.querySelector('.needle'), angle);
+    }
+}, 10);
+
+function updateConsumptionMeaming() 
+{
+    if(maxAngle < 45)
+    {
+        document.getElementById("consumptionValueMeaning").innerHTML = "Very low";
+    }
+    if(maxAngle < 90 && maxAngle > 45)
+    {
+        document.getElementById("consumptionValueMeaning").innerHTML = "Very low";
+
+        setTimeout(function() {
+            document.getElementById("consumptionValueMeaning").innerHTML = "Low";
+        }, 1000);
+    }
+    if(maxAngle < 135 && maxAngle > 90)
+    {
+        document.getElementById("consumptionValueMeaning").innerHTML = "Very low";
+
+        setTimeout(function() {
+            document.getElementById("consumptionValueMeaning").innerHTML = "Low";
+        }, 1000);
+
+        setTimeout(function() {
+            document.getElementById("consumptionValueMeaning").innerHTML = "Medium";
+        }, 2000);
+    }
+    if(maxAngle > 135)
+    {
+        document.getElementById("consumptionValueMeaning").innerHTML = "Very low";
+
+        setTimeout(function() {
+            document.getElementById("consumptionValueMeaning").innerHTML = "Low";
+        }, 1000);
+
+        setTimeout(function() {
+            document.getElementById("consumptionValueMeaning").innerHTML = "Medium";
+        }, 2000);
+
+        setTimeout(function() {
+            document.getElementById("consumptionValueMeaning").innerHTML = "High";
+        }, 3000);
+    }
+}
+
+
 </script>
 
-<button type="button" class="btn btn-success" onclick="showCode()">RUN</button> 
+<button type="button" class="btn btn-success" onclick="showCode(),updateMaxAngle()">RUN</button> 
 
 <br>
 
@@ -57,7 +141,19 @@ int main()
     <textarea class="textarea" id="divResult" readonly></textarea>
 </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="gauge-wrapper">
+    <div class="gauge four rischio3">
+        <div class="slice-colors">
+            <div class="st slice-item"></div>
+            <div class="st slice-item"></div>
+            <div class="st slice-item"></div>
+            <div class="st slice-item"></div>
+        </div>
+        <div class="needle"></div>
+        <div class="gauge-center">
+            <div class="label">Consumption</div>
+            <div class="number" id="consumptionValueMeaning">None</div>
+        </div>
+    </div>
 </div>
+

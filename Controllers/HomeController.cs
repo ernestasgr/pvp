@@ -70,8 +70,18 @@ public class HomeController : Controller
                 returnValue += str + '\n';
             }
         }
-        
+
         return Json(returnValue);
+    }
+
+    [HttpPost]
+    public IActionResult ShowConsumptionValue()
+    {
+        
+        Random rnd = new Random(); // CONSUMPTION VALUE TEST, LATER FROM DB
+        int testConsumptionValue = rnd.Next(0, 180);
+        return Json(testConsumptionValue);
+        
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
