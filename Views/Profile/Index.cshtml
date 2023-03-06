@@ -1,0 +1,30 @@
+@using test.Models
+
+@model Account
+@{
+	ViewData["Title"] = "User Profile Page";
+}
+
+<h1>User information</h1>
+<table class="table table-striped">
+    <tr>
+        <td>ID:</td>
+        <td>@Model.IDAccount</td>
+    </tr>
+    <tr>
+        <td>Nickname:</td>
+        <td>@Model.Nickname</td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <td>Hash:</td>
+        <td>@Model.Hash</td>
+    </tr>
+    <tr>
+        <td>Role:</td>
+        <td>@Model.Role</td>
+    </tr>
+</table>

@@ -29,6 +29,11 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Admin() 
+    {
+        return View();
+    }
+
     [HttpPost]
     public IActionResult ShowCode([FromBody]string text)
     {
