@@ -1,6 +1,5 @@
-@{
-	ViewData["Title"] = "Users page";
-}
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model IEnumerable<Account>
 
 @section header {
     <header>
@@ -25,3 +24,37 @@
     </header>
 }
 
+<h1>Users</h1>
+
+
+<form method="get">
+    <label for="searchId">Search by ID:</label>
+    <input type="text" name="searchId" id="searchId" value="@HttpContextAccessor.HttpContext.Request.Query["id"]" />
+    <button type="submit" class="btn btn-primary">Search</button>
+    <a href="/Admin/Users" class="btn btn-primary">Reset users</a>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.IDAccount</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@user.IDAccount" class="btn btn-primary">Update</a>
+                    <a asp-action="Delete" asp-route-id="@user.IDAccount" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
