@@ -28,6 +28,10 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult Compiler()
+    {
+        return View();
+    }
 
     [HttpPost]
     public IActionResult ShowCode([FromBody]string text)
