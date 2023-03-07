@@ -31,13 +31,15 @@
     <label for="searchId">Search by ID:</label>
     <input type="text" name="searchId" id="searchId" value="@HttpContextAccessor.HttpContext.Request.Query["id"]" />
     <button type="submit" class="btn btn-primary">Search</button>
-    <a href="/Admin/Users" class="btn btn-primary">Reset users</a>
+    <a href="/Admin/Users" class="btn btn-secondary">Reset search</a>
+    <a asp-action="CreateUser" class="btn btn-success">Create new user</a>
 </form>
 
 <table class="table">
     <thead>
         <tr>
             <th>ID</th>
+            <th>Nickname</th>
             <th>Email</th>
             <th>Role</th>
             <th>Action</th>
@@ -48,11 +50,12 @@
         {
             <tr>
                 <td>@user.IDAccount</td>
+                <td>@user.Nickname</td>
                 <td>@user.Email</td>
                 <td>@user.Role</td>
                 <td>
-                    <a asp-action="Update" asp-route-id="@user.IDAccount" class="btn btn-primary">Update</a>
-                    <a asp-action="Delete" asp-route-id="@user.IDAccount" class="btn btn-danger">Delete</a>
+                    <a asp-action="UpdateUser" asp-route-id="@user.IDAccount" class="btn btn-primary">Update</a>
+                    <a asp-action="DeleteUser" asp-route-id="@user.IDAccount" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }

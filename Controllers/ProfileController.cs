@@ -19,7 +19,7 @@ namespace test.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var account = await db.Accounts.FindAsync(3);
+            var account = await db.Accounts.OrderBy(user => user.IDAccount).FirstOrDefaultAsync();
 
             if(account == null)
             {
