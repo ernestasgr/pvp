@@ -25,6 +25,7 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
+//Makes static image files available to be used in site
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
@@ -32,14 +33,21 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/images"
 });
 
+
+//Makes css files available to be used in site
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), @"../../../wwwroot/css")),
+    RequestPath = "/css"
+});
+
 app.UseRouting();
-app.UseDefaultFiles();
+
 app.UseAuthorization();
 
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.MapDefaultControllerRoute();
+app.MapControllerRoute(
+name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
