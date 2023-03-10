@@ -29,16 +29,15 @@ app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), @"../../../wwwroot/images")),
+        Path.Combine(AppContext.BaseDirectory, "../../../wwwroot", "images")),
     RequestPath = "/images"
 });
 
 
-//Makes css files available to be used in site
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), @"../../../wwwroot/css")),
+        Path.Combine(AppContext.BaseDirectory, "../../../wwwroot", "css")),
     RequestPath = "/css"
 });
 
