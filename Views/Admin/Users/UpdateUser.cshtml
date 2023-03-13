@@ -1,4 +1,5 @@
-@model Account
+@model AccountViewModel
+@inject AppDbContext _context
 
 <h2>Update Users - @Model.Nickname information</h2>
 
@@ -19,8 +20,21 @@
         <span asp-validation-for="Hash" class="text-danger"></span>
     </div><br>
     <div class="form-group">
-        <label asp-for="Role" class="control-label"></label>
-        <input asp-for="Role" class="form-control" />
+        <label asp-for="Role" class="control-label">Role</label>
+        <select asp-for="Role" class="form-control">
+            <option value="">Select a role</option>
+            @foreach (var role in _context.Roles.Distinct())
+            {
+                if (role.Role == Model.RoleName)
+                {
+                    <option value="@role.Id" selected>@role.Role</option>
+                }
+                else
+                {
+                    <option value="@role.Id">@role.Role</option>
+                }
+            }
+        </select>
         <span asp-validation-for="Role" class="text-danger"></span>
     </div><br>
     <div class="form-group">

@@ -26,13 +26,15 @@ namespace test.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var model = new Account
+            var roleColumn = db.Roles.FirstOrDefault(r => r.Id == account.Role);
+
+            var model = new AccountViewModel
             {
                 Email = account.Email,
                 Hash = account.Hash,
                 Salt = account.Salt,
                 Nickname = account.Nickname,
-                Role = account.Role
+                RoleName = roleColumn.Role
             };
 
             return View(model);

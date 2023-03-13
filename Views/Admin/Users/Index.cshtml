@@ -1,5 +1,5 @@
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
-@model IEnumerable<Account>
+@model IEnumerable<AccountViewModel>
 
 @section header {
     <header>
@@ -50,7 +50,7 @@
             <tr>
                 <td>@user.Nickname</td>
                 <td>@user.Email</td>
-                <td>@user.Role</td>
+                <td>@user.RoleName</td>
                 <td>
                     <a asp-action="UpdateUser" asp-route-nickname="@user.Nickname" class="btn btn-primary">Update</a>
                     <a asp-action="DeleteUser" asp-route-nickname="@user.Nickname" class="btn btn-danger">Delete</a>

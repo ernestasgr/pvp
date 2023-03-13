@@ -21,12 +21,24 @@ namespace test.Controllers
         public async Task<IActionResult> Users(string nickname)
         {
             var users = _context.Accounts.ToList();
+            
             if (!string.IsNullOrEmpty(nickname))
             {
-                users = users.Where(u => u.Nickname.ToString().Contains(nickname)).ToList();
+                users = users.Where(u => u.Nickname.Contains(nickname)).ToList();
             }
 
-            return View("Users/Index", users);
+            var accountViewModels = users
+                .Select(u => new AccountViewModel
+                {
+                    Nickname = u.Nickname,
+                    Hash = u.Hash,
+                    Salt = u.Salt,
+                    Email = u.Email,
+                    RoleName = _context.Roles.FirstOrDefault(r => r.Id == u.Role)?.Role
+                })
+                .ToList();
+
+            return View("Users/Index", accountViewModels);
         }
 
         [HttpGet]
@@ -44,7 +56,7 @@ namespace test.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Admin/CreateUser")]
-        public IActionResult CreateUser(Account user)
+        public IActionResult CreateUser(AccountViewModel user)
         {
             try
             {
@@ -53,7 +65,13 @@ namespace test.Controllers
                     return BadRequest(ModelState);
                 }
 
-                _context.Accounts.Add(user);
+                _context.Accounts.Add(new Account{
+                    Email = user.Email,
+                    Hash = user.Hash,
+                    Role = user.Role,
+                    Nickname = user.Nickname,
+                    Salt = user.Salt
+                });
                 _context.SaveChanges();
 
                 return RedirectToAction("Users", "Admin");
@@ -68,12 +86,23 @@ namespace test.Controllers
         public async Task<IActionResult> UpdateUser(string nickname) 
         {
             var account = await _context.Accounts.FindAsync(nickname);
-            return View("Users/UpdateUser", account);
+
+            var accountViewModel = new AccountViewModel 
+            {
+                Email = account.Email,
+                Hash = account.Hash,
+                Nickname = account.Nickname,
+                Role = account.Role,
+                RoleName = _context.Roles.FirstOrDefault(r => r.Id == account.Role).Role,
+                Salt = account.Salt
+            };
+
+            return View("Users/UpdateUser", accountViewModel);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> UpdateUser(Account updatedAccount)
+        public async Task<IActionResult> UpdateUser(AccountViewModel updatedAccount)
         {
             var existingAccount = await _context.Accounts.FindAsync(updatedAccount.Nickname);
 

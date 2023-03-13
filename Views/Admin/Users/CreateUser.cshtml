@@ -2,7 +2,8 @@
     ViewData["Title"] = "Create User";
 }
 
-@model Account
+@model AccountViewModel
+@inject AppDbContext _context
 
 <h2>Create User</h2>
 
@@ -25,11 +26,17 @@
         <span asp-validation-for="Hash" class="text-danger"></span>
     </div><br>
     <div class="form-group">
-        <label asp-for="Role" class="control-label"></label>
-        <input asp-for="Role" class="form-control" />
+        <label asp-for="Role" class="control-label">Role</label>
+        <select asp-for="Role" class="form-control">
+            <option value="">Select a role</option>
+            @foreach (var role in _context.Roles.Distinct())
+            {
+                <option value="@role.Id">@role.Role</option>
+            }
+        </select>
         <span asp-validation-for="Role" class="text-danger"></span>
     </div><br>
-     <div class="form-group">
+    <div class="form-group">
         <label asp-for="Salt" class="control-label"></label>
         <input asp-for="Salt" class="form-control" />
         <span asp-validation-for="Salt" class="text-danger"></span>
@@ -41,5 +48,7 @@
 </form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
