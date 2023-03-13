@@ -19,5 +19,8 @@ namespace test.Models
 
         [Required]
 		public string? Role { get; set; }
+
+		[Required]
+		public string? Salt { get; set; }
 	}
 }

@@ -49,6 +49,7 @@ namespace test.Controllers
                 edit.Nickname = account.Nickname;
                 edit.Email = account.Email;
                 edit.Hash = account.Hash;
+				edit.Salt = account.Salt;
                 edit.Role = account.Role;
 				await db.SaveChangesAsync();
 			}

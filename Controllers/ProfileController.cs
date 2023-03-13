@@ -31,6 +31,7 @@ namespace test.Controllers
                 IDAccount = account.IDAccount,
                 Email = account.Email,
                 Hash = account.Hash,
+                Salt = account.Salt,
                 Nickname = account.Nickname,
                 Role = account.Role
             };

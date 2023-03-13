@@ -82,6 +82,7 @@ namespace test.Controllers
                 existingAccount.Nickname = updatedAccount.Nickname;
                 existingAccount.Email = updatedAccount.Email;
                 existingAccount.Hash = updatedAccount.Hash;
+                existingAccount.Salt = updatedAccount.Salt;
                 existingAccount.Role = updatedAccount.Role;
 
                 await _context.SaveChangesAsync();
