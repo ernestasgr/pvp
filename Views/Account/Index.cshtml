@@ -22,8 +22,8 @@
                     <td>@account.Email</td>
                     <td>@account.Hash</td>
                     <td>@account.Role</td>
-                    <td><a href="/Account?delete=@account.IDAccount">(delete)</a></td>
-                    <td><a href="/Account?edit=@account.IDAccount">(edit)</a></td>
+                    <td><a href="/Account?delete=@account.Nickname">(delete)</a></td>
+                    <td><a href="/Account?edit=@account.Nickname">(edit)</a></td>
                 </tr>
                 }
             </table>
@@ -39,7 +39,6 @@
 	else if (Model is Account)
 	{
 		<form method="post">
-			<input type="hidden" name="IDAccount" value="@Model.IDAccount" />
 			<input type="text" name="Nickname" placeholder="Nickname" value="@Model.Nickname"/><br />
 			<input type="text" name="Email" placeholder="Email" value="@Model.Email"/><br />
             <input type="text" name="Hash" placeholder="Hash" value="@Model.Hash"/><br />

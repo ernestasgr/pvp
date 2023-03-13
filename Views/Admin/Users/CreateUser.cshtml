@@ -29,6 +29,11 @@
         <input asp-for="Role" class="form-control" />
         <span asp-validation-for="Role" class="text-danger"></span>
     </div><br>
+     <div class="form-group">
+        <label asp-for="Salt" class="control-label"></label>
+        <input asp-for="Salt" class="form-control" />
+        <span asp-validation-for="Salt" class="text-danger"></span>
+    </div><br>
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-success" />
         <a asp-action="Users" asp-controller="Admin" class="btn btn-secondary">Cancel</a>

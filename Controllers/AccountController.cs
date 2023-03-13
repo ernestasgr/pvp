@@ -38,9 +38,9 @@ namespace test.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Index([FromForm] Account account)
 		{
-			if (account.IDAccount != 0)
+			if (!string.IsNullOrEmpty(account.Nickname))
 			{
-				var edit = await db.Accounts.FindAsync(account.IDAccount);
+				var edit = await db.Accounts.FindAsync(account.Nickname);
 				if (edit == null)
                 {
                     return NotFound();

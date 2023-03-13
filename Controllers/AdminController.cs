@@ -18,12 +18,12 @@ namespace test.Controllers
 
         [Route("Admin/Users")]
         [HttpGet]
-        public async Task<IActionResult> Users(string searchId)
+        public async Task<IActionResult> Users(string nickname)
         {
             var users = _context.Accounts.ToList();
-            if (!string.IsNullOrEmpty(searchId))
+            if (!string.IsNullOrEmpty(nickname))
             {
-                users = users.Where(u => u.IDAccount.ToString().Contains(searchId)).ToList();
+                users = users.Where(u => u.Nickname.ToString().Contains(nickname)).ToList();
             }
 
             return View("Users/Index", users);
@@ -65,9 +65,9 @@ namespace test.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> UpdateUser(int id) 
+        public async Task<IActionResult> UpdateUser(string nickname) 
         {
-            var account = await _context.Accounts.FindAsync(id);
+            var account = await _context.Accounts.FindAsync(nickname);
             return View("Users/UpdateUser", account);
         }
 
@@ -75,7 +75,7 @@ namespace test.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateUser(Account updatedAccount)
         {
-            var existingAccount = await _context.Accounts.FindAsync(updatedAccount.IDAccount);
+            var existingAccount = await _context.Accounts.FindAsync(updatedAccount.Nickname);
 
             if (existingAccount != null)
             {
@@ -92,9 +92,9 @@ namespace test.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(string nickname)
         {
-            var account = await _context.Accounts.FindAsync(id);
+            var account = await _context.Accounts.FindAsync(nickname);
             if (account == null)
             {
                 return NotFound();
@@ -104,9 +104,9 @@ namespace test.Controllers
 
         [HttpPost, ActionName("DeleteUser")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string nickname)
         {
-            var account = await _context.Accounts.FindAsync(id);
+            var account = await _context.Accounts.FindAsync(nickname);
             if (account == null)
             {
                 return NotFound();

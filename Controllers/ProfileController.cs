@@ -19,7 +19,7 @@ namespace test.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var account = await db.Accounts.OrderBy(user => user.IDAccount).FirstOrDefaultAsync();
+            var account = await db.Accounts.OrderBy(user => user.Nickname).FirstOrDefaultAsync();
 
             if(account == null)
             {
@@ -28,7 +28,6 @@ namespace test.Controllers
 
             var model = new Account
             {
-                IDAccount = account.IDAccount,
                 Email = account.Email,
                 Hash = account.Hash,
                 Salt = account.Salt,

@@ -6,9 +6,6 @@ namespace test.Models
 	public class Account
 	{
 		[Key]
-		public int IDAccount { get; set; }
-
-		[Required]
 		public string? Nickname { get; set; }
 
 		[Required]
